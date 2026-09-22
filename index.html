@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Luxury Fragrance Showcase</title>
+<title>Luxury Fragrance & Electronics Showcase</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:wght@400;500&display=swap');
 :root{--bg:#f4f2ee;--paper:#fff;--ink:#111;--muted:#85817a;--line:#ddd9d1}
@@ -21,6 +21,14 @@ header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdro
 .filter{border:1px solid var(--line);background:transparent;border-radius:99px;padding:8px 14px;font:inherit;font-size:11px;cursor:pointer;transition:.25s ease}
 .filter:hover,.filter.active{background:#111;color:#fff;border-color:#111}
 .count{font-size:11px;color:var(--muted)}
+.section{max-width:1500px;margin:0 auto;padding:34px 42px 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:6px}
+.section-title{font-family:"Playfair Display",Georgia,serif;font-size:30px;font-weight:500;letter-spacing:-.02em}
+.section-kicker{font-size:10px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase}
+.section .grid{padding-left:0;padding-right:0;padding-top:24px}
+.card[data-type="electronics"] .photo{background:#fff}
+.coming{position:absolute;top:13px;right:13px;background:rgba(255,255,255,.94);padding:7px 9px;font-size:9px;letter-spacing:.12em}
+@media(max-width:760px){.section{padding-left:20px;padding-right:20px}.section-title{font-size:25px}}
 .grid{max-width:1500px;margin:auto;padding:24px 42px 90px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px}
 .card{cursor:pointer;opacity:0;transform:translateY(24px);animation:enter .8s cubic-bezier(.2,.8,.2,1) forwards}
 @keyframes enter{to{opacity:1;transform:translateY(0)}}
@@ -61,16 +69,20 @@ header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdro
 
 <section class="controls">
   <div class="filters">
-    <button class="filter active" data-filter="all">All</button>
+    <button class="filter active" data-filter="all">All Products</button>
+    <button class="filter" data-filter="fragrances">Fragrances</button>
+    <button class="filter" data-filter="electronics">Electronics</button>
     <button class="filter" data-filter="men">Men</button>
     <button class="filter" data-filter="women">Women</button>
     <button class="filter" data-filter="unisex">Unisex</button>
   </div>
-  <div class="count" id="count">10 fragrances</div>
+  <div class="count" id="count">14 products</div>
 </section>
 
-<main class="grid" id="grid">
-    <article class="card" data-category="unisex" data-name="maison francis kurkdjian baccarat rouge 540" data-index="0">
+<section class="section" data-section="fragrances">
+  <div class="section-head"><div class="section-title">Fragrances</div><div class="section-kicker">Luxury fragrance collection</div></div>
+  <div class="grid" id="fragranceGrid">
+    <article class="card" data-type="fragrances" data-category="unisex" data-name="maison francis kurkdjian baccarat rouge 540" data-index="0">
       <div class="photo">
         <img src="https://contenthub-delivery.mecca.com/api/public/content/I-030120-I-030120-M1-MaisonFrancisKurkdjian-BaccaratRouge540Extrait-94y1qkJTIKjnExF06ofbg.jpg" alt="Maison Francis Kurkdjian Baccarat Rouge 540" loading="lazy">
         
@@ -85,7 +97,7 @@ header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdro
       </div>
     </article>
     
-    <article class="card" data-category="unisex" data-name="louis vuitton imagination" data-index="1">
+    <article class="card" data-type="fragrances" data-category="unisex" data-name="louis vuitton imagination" data-index="1">
       <div class="photo">
         <img src="https://fr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-parfum-imagination--LP0476_PM2_Front%20view.jpg" alt="Louis Vuitton Imagination" loading="lazy">
         
@@ -100,7 +112,7 @@ header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdro
       </div>
     </article>
     
-    <article class="card" data-category="men&#x27;s" data-name="dior sauvage elixir" data-index="2">
+    <article class="card" data-type="fragrances" data-category="men&#x27;s" data-name="dior sauvage elixir" data-index="2">
       <div class="photo">
         <img src="https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw0df82930/Y0996460/Y0996460_C099600755_E01_GHC.jpg?sw=1200" alt="Dior Sauvage Elixir" loading="lazy">
         
@@ -115,7 +127,7 @@ header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdro
       </div>
     </article>
     
-    <article class="card" data-category="unisex" data-name="louis vuitton pacific chill" data-index="3">
+    <article class="card" data-type="fragrances" data-category="unisex" data-name="louis vuitton pacific chill" data-index="3">
       <div class="photo">
         <img src="https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-pacific-chill---LP0461_PM2_Front%20view.jpg" alt="Louis Vuitton Pacific Chill" loading="lazy">
         
@@ -130,7 +142,7 @@ header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdro
       </div>
     </article>
     
-    <article class="card" data-category="women&#x27;s" data-name="louis vuitton california dream" data-index="4">
+    <article class="card" data-type="fragrances" data-category="women&#x27;s" data-name="louis vuitton california dream" data-index="4">
       <div class="photo">
         <img src="https://fr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-parfum-california-dream--LP0483_PM2_Front%20view.jpg" alt="Louis Vuitton California Dream" loading="lazy">
         
@@ -145,7 +157,7 @@ header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdro
       </div>
     </article>
     
-    <article class="card" data-category="women&#x27;s / unisex" data-name="tom ford lost cherry" data-index="5">
+    <article class="card" data-type="fragrances" data-category="women&#x27;s / unisex" data-name="tom ford lost cherry" data-index="5">
       <div class="photo">
         <img src="https://www.tomfordbeauty.com/cdn/shop/files/tf_sku_T6LN01_2000x2000_0.png?v=1790065933&amp;width=2000" alt="Tom Ford Lost Cherry" loading="lazy">
         
@@ -160,7 +172,7 @@ header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdro
       </div>
     </article>
     
-    <article class="card" data-category="men&#x27;s / unisex" data-name="tom ford oud wood" data-index="6">
+    <article class="card" data-type="fragrances" data-category="men&#x27;s / unisex" data-name="tom ford oud wood" data-index="6">
       <div class="photo">
         <img src="https://www.tomfordbeauty.com/cdn/shop/files/tf_sku_T1XF01_2000x2000_0.png?v=1790085430&amp;width=2000" alt="Tom Ford Oud Wood" loading="lazy">
         
@@ -175,7 +187,7 @@ header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdro
       </div>
     </article>
     
-    <article class="card" data-category="men&#x27;s / unisex" data-name="louis vuitton ombre nomade" data-index="7">
+    <article class="card" data-type="fragrances" data-category="men&#x27;s / unisex" data-name="louis vuitton ombre nomade" data-index="7">
       <div class="photo">
         <img src="https://fr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-parfum-ombre-nomade--LP0529_PM2_Front%20view.jpg" alt="Louis Vuitton Ombre Nomade" loading="lazy">
         
@@ -190,7 +202,7 @@ header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdro
       </div>
     </article>
     
-    <article class="card" data-category="men&#x27;s / unisex" data-name="tom ford tobacco vanille" data-index="8">
+    <article class="card" data-type="fragrances" data-category="men&#x27;s / unisex" data-name="tom ford tobacco vanille" data-index="8">
       <div class="photo">
         <img src="https://www.tomfordbeauty.com/cdn/shop/files/tf_sku_T01K01_2000x2000_0.png?v=1790083541&amp;width=2000" alt="Tom Ford Tobacco Vanille" loading="lazy">
         
@@ -205,7 +217,7 @@ header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdro
       </div>
     </article>
     
-    <article class="card" data-category="men&#x27;s / unisex" data-name="creed aventus" data-index="9">
+    <article class="card" data-type="fragrances" data-category="men&#x27;s / unisex" data-name="creed aventus" data-index="9">
       <div class="photo">
         <img src="https://static.thcdn.com/productimg/original/12852836-1365337305025588.jpg" alt="Creed Aventus" loading="lazy">
         <span class="sold">OUT OF STOCK</span>
@@ -219,7 +231,30 @@ header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdro
         <div class="price">$249.00</div>
       </div>
     </article>
-    </main>
+    </div>
+</section>
+
+<section class="section" data-section="electronics">
+  <div class="section-head"><div class="section-title">Electronics</div><div class="section-kicker">Apple AirPods</div></div>
+  <div class="grid" id="electronicsGrid">
+    <article class="card" data-type="electronics" data-category="electronics" data-name="airpods max" data-index="10">
+      <div class="photo"><img src="https://www.apple.com/newsroom/images/2024/09/apple-introduces-airpods-4/article/Apple-AirPods-side-view-240909_photogrid.jpg.large.jpg" alt="Apple AirPods Max" loading="lazy"><span class="coming">PRICE COMING SOON</span><div class="hover-shine"></div><div class="view">VIEW</div></div>
+      <div class="info"><div class="brand">Apple</div><div class="name">AirPods Max</div><div class="sub">Over-ear headphones · Electronics</div><div class="price">Price coming soon</div></div>
+    </article>
+    <article class="card" data-type="electronics" data-category="electronics" data-name="airpods 4 anc" data-index="11">
+      <div class="photo"><img src="https://www.apple.com/newsroom/images/2024/09/apple-introduces-airpods-4/article/Apple-AirPods-4-with-case-240909_big.jpg.large.jpg" alt="Apple AirPods 4 with Active Noise Cancellation" loading="lazy"><span class="coming">PRICE COMING SOON</span><div class="hover-shine"></div><div class="view">VIEW</div></div>
+      <div class="info"><div class="brand">Apple</div><div class="name">AirPods 4 ANC</div><div class="sub">Active Noise Cancellation · Electronics</div><div class="price">Price coming soon</div></div>
+    </article>
+    <article class="card" data-type="electronics" data-category="electronics" data-name="airpods 3" data-index="12">
+      <div class="photo"><img src="https://www.apple.com/newsroom/images/product/airpods/standard/Apple_AirPods-3rd-gen_hero_10182021_inline.jpg.large.jpg" alt="Apple AirPods 3rd generation" loading="lazy"><span class="coming">PRICE COMING SOON</span><div class="hover-shine"></div><div class="view">VIEW</div></div>
+      <div class="info"><div class="brand">Apple</div><div class="name">AirPods 3</div><div class="sub">3rd generation · Electronics</div><div class="price">Price coming soon</div></div>
+    </article>
+    <article class="card" data-type="electronics" data-category="electronics" data-name="airpods pro 2" data-index="13">
+      <div class="photo"><img src="https://www.apple.com/newsroom/images/product/airpods/standard/Apple-AirPods-Pro-2nd-gen-hero-220907_big.jpg.large.jpg" alt="Apple AirPods Pro 2" loading="lazy"><div class="hover-shine"></div><div class="view">VIEW</div></div>
+      <div class="info"><div class="brand">Apple</div><div class="name">AirPods Pro 2</div><div class="sub">2nd generation · Electronics</div><div class="price">$199.00</div></div>
+    </article>
+  </div>
+</section>
 
 <div class="modal" id="modal">
   <button class="close" aria-label="Close">×</button>
@@ -236,29 +271,51 @@ header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdro
 </div>
 
 <script>
-const data=[{brand:'Maison Francis Kurkdjian',name:'Baccarat Rouge 540',size:'70ml',category:'Unisex',price:'$249.00',image:'https://contenthub-delivery.mecca.com/api/public/content/I-030120-I-030120-M1-MaisonFrancisKurkdjian-BaccaratRouge540Extrait-94y1qkJTIKjnExF06ofbg.webp',stock:true},{brand:'Louis Vuitton',name:'Imagination',size:'100ml',category:'Unisex',price:'$449.00',image:'https://fr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-parfum-imagination--LP0476_PM2_Front%20view.jpg',stock:true},{brand:'Dior',name:'Sauvage Elixir',size:'100ml',category:"Men's",price:'$179.00',image:'https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw0df82930/Y0996460/Y0996460_C099600755_E01_GHC.jpg?sw=1200',stock:true},{brand:'Louis Vuitton',name:'Pacific Chill',size:'100ml',category:'Unisex',price:'$449.00',image:'https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-pacific-chill---LP0461_PM2_Front%20view.jpg',stock:true},{brand:'Louis Vuitton',name:'California Dream',size:'100ml',category:"Women's",price:'$449.00',image:'https://fr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-parfum-california-dream--LP0483_PM2_Front%20view.jpg',stock:true},{brand:'Tom Ford',name:'Lost Cherry',size:'100ml',category:"Women's / Unisex",price:'$349.00',image:'https://www.tomfordbeauty.com/cdn/shop/files/tf_sku_T6LN01_2000x2000_0.png?v=1790065933&width=2000',stock:true},{brand:'Tom Ford',name:'Oud Wood',size:'100ml',category:"Men's / Unisex",price:'$229.00',image:'https://www.tomfordbeauty.com/cdn/shop/files/tf_sku_T1XF01_2000x2000_0.png?v=1790085430&width=2000',stock:true},{brand:'Louis Vuitton',name:'Ombre Nomade',size:'100ml',category:"Men's / Unisex",price:'$299.00',image:'https://fr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-parfum-ombre-nomade--LP0529_PM2_Front%20view.jpg',stock:true},{brand:'Tom Ford',name:'Tobacco Vanille',size:'100ml',category:"Men's / Unisex",price:'$229.00',image:'https://www.tomfordbeauty.com/cdn/shop/files/tf_sku_T01K01_2000x2000_0.png?v=1790083541&width=2000',stock:true},{brand:'Creed',name:'Aventus',size:'100ml',category:"Men's / Unisex",price:'$249.00',image:'https://static.thcdn.com/productimg/original/12852836-1365337305025588.jpg',stock:false}];
+const data=[
+{brand:'Maison Francis Kurkdjian',name:'Baccarat Rouge 540',size:'70ml',category:'Unisex',price:'$249.00',image:'https://contenthub-delivery.mecca.com/api/public/content/I-030120-I-030120-M1-MaisonFrancisKurkdjian-BaccaratRouge540Extrait-94y1qkJTIKjnExF06ofbg.webp',stock:true,type:'fragrances'},
+{brand:'Louis Vuitton',name:'Imagination',size:'100ml',category:'Unisex',price:'$449.00',image:'https://fr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-parfum-imagination--LP0476_PM2_Front%20view.jpg',stock:true,type:'fragrances'},
+{brand:'Dior',name:'Sauvage Elixir',size:'100ml',category:"Men's",price:'$179.00',image:'https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw0df82930/Y0996460/Y0996460_C099600755_E01_GHC.jpg?sw=1200',stock:true,type:'fragrances'},
+{brand:'Louis Vuitton',name:'Pacific Chill',size:'100ml',category:'Unisex',price:'$449.00',image:'https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-pacific-chill---LP0461_PM2_Front%20view.jpg',stock:true,type:'fragrances'},
+{brand:'Louis Vuitton',name:'California Dream',size:'100ml',category:"Women's",price:'$449.00',image:'https://fr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-parfum-california-dream--LP0483_PM2_Front%20view.jpg',stock:true,type:'fragrances'},
+{brand:'Tom Ford',name:'Lost Cherry',size:'100ml',category:"Women's / Unisex",price:'$349.00',image:'https://www.tomfordbeauty.com/cdn/shop/files/tf_sku_T6LN01_2000x2000_0.png?v=1790065933&width=2000',stock:true,type:'fragrances'},
+{brand:'Tom Ford',name:'Oud Wood',size:'100ml',category:"Men's / Unisex",price:'$229.00',image:'https://www.tomfordbeauty.com/cdn/shop/files/tf_sku_T1XF01_2000x2000_0.png?v=1790085430&width=2000',stock:true,type:'fragrances'},
+{brand:'Louis Vuitton',name:'Ombre Nomade',size:'100ml',category:"Men's / Unisex",price:'$299.00',image:'https://fr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-parfum-ombre-nomade--LP0529_PM2_Front%20view.jpg',stock:true,type:'fragrances'},
+{brand:'Tom Ford',name:'Tobacco Vanille',size:'100ml',category:"Men's / Unisex",price:'$229.00',image:'https://www.tomfordbeauty.com/cdn/shop/files/tf_sku_T01K01_2000x2000_0.png?v=1790083541&width=2000',stock:true,type:'fragrances'},
+{brand:'Creed',name:'Aventus',size:'100ml',category:"Men's / Unisex",price:'$249.00',image:'https://static.thcdn.com/productimg/original/12852836-1365337305025588.jpg',stock:false,type:'fragrances'},
+{brand:'Apple',name:'AirPods Max',size:'Over-ear headphones',category:'Electronics',price:'$399.00',image:'https://www.apple.com/newsroom/images/2024/09/apple-introduces-airpods-4/article/Apple-AirPods-side-view-240909_photogrid.jpg.large.jpg',stock:true,type:'electronics'},
+{brand:'Apple',name:'AirPods 4 ANC',size:'Active Noise Cancellation',category:'Electronics',price:'$149.00',image:'https://www.apple.com/newsroom/images/2024/09/apple-introduces-airpods-4/article/Apple-AirPods-4-with-case-240909_big.jpg.large.jpg',stock:true,type:'electronics'},
+{brand:'Apple',name:'AirPods 3',size:'3rd generation',category:'Electronics',price:'$199.00',image:'https://www.apple.com/newsroom/images/product/airpods/standard/Apple_AirPods-3rd-gen_hero_10182021_inline.jpg.large.jpg',stock:true,type:'electronics'},
+{brand:'Apple',name:'AirPods Pro 2',size:'2nd generation',category:'Electronics',price:'$199.00',image:'https://www.apple.com/newsroom/images/product/airpods/standard/Apple-AirPods-Pro-2nd-gen-hero-220907_big.jpg.large.jpg',stock:true,type:'electronics'}
+];
 const cards=[...document.querySelectorAll('.card')];
 const buttons=[...document.querySelectorAll('.filter')];
 const search=document.getElementById('search');
 const count=document.getElementById('count');
 const modal=document.getElementById('modal');
 const close=document.querySelector('.close');
+const sections=[...document.querySelectorAll('[data-section]')];
 let active='all';
 
 function update(){
   const q=search.value.toLowerCase().trim();
   let visible=0;
   cards.forEach(card=>{
+    const type=card.dataset.type;
     const cat=card.dataset.category;
     const name=card.dataset.name;
-    const okCat=active==='all'||cat.includes(active);
-    const okSearch=!q||name.includes(q);
+    const okCat=active==='all' || active===type || cat.includes(active);
+    const okSearch=!q || name.includes(q);
     const show=okCat&&okSearch;
     card.style.display=show?'':'none';
     if(show) visible++;
   });
-  count.textContent=visible+' fragrance'+(visible===1?'':'s');
+  sections.forEach(section=>{
+    const hasVisible=[...section.querySelectorAll('.card')].some(card=>card.style.display!=='none');
+    section.style.display=hasVisible?'':'none';
+  });
+  count.textContent=visible+' product'+(visible===1?'':'s');
 }
+
 buttons.forEach(btn=>btn.addEventListener('click',()=>{
   buttons.forEach(x=>x.classList.remove('active'));
   btn.classList.add('active');
