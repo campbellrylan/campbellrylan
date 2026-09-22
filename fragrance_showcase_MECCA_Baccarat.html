@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Luxury Fragrance Showcase</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:wght@400;500&display=swap');
+:root{--bg:#f4f2ee;--paper:#fff;--ink:#111;--muted:#85817a;--line:#ddd9d1}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",Arial,sans-serif}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 50% -20%,#fff,transparent 48%);z-index:-1}
+header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdrop-filter:blur(18px);border-bottom:1px solid rgba(221,217,209,.8)}
+.nav{max-width:1500px;margin:auto;padding:18px 42px;display:flex;justify-content:space-between;align-items:center}
+.wordmark{display:none}
+.search{width:190px;border:0;border-bottom:1px solid #aaa59d;background:transparent;outline:0;padding:8px 1px;font:inherit;font-size:12px}
+.search::placeholder{color:#9c9891}
+.controls{max-width:1500px;margin:auto;padding:30px 42px 12px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.filters{display:flex;gap:7px;flex-wrap:wrap}
+.filter{border:1px solid var(--line);background:transparent;border-radius:99px;padding:8px 14px;font:inherit;font-size:11px;cursor:pointer;transition:.25s ease}
+.filter:hover,.filter.active{background:#111;color:#fff;border-color:#111}
+.count{font-size:11px;color:var(--muted)}
+.grid{max-width:1500px;margin:auto;padding:24px 42px 90px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px}
+.card{cursor:pointer;opacity:0;transform:translateY(24px);animation:enter .8s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes enter{to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation-delay:.04s}.card:nth-child(2){animation-delay:.08s}.card:nth-child(3){animation-delay:.12s}.card:nth-child(4){animation-delay:.16s}.card:nth-child(5){animation-delay:.20s}.card:nth-child(6){animation-delay:.24s}.card:nth-child(7){animation-delay:.28s}.card:nth-child(8){animation-delay:.32s}.card:nth-child(9){animation-delay:.36s}.card:nth-child(10){animation-delay:.40s}
+.photo{position:relative;aspect-ratio:1/1.12;background:#fff;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .5s ease}
+.card:hover .photo img{transform:scale(1.045)}
+.hover-shine{position:absolute;inset:-50% -30%;background:linear-gradient(110deg,transparent 40%,rgba(255,255,255,.45) 50%,transparent 60%);transform:translateX(-80%);transition:transform .9s ease;pointer-events:none}
+.card:hover .hover-shine{transform:translateX(80%)}
+.view{position:absolute;left:50%;top:50%;transform:translate(-50%,-42%) scale(.92);opacity:0;background:rgba(17,17,17,.9);color:#fff;border-radius:999px;padding:10px 17px;font-size:10px;letter-spacing:.16em;transition:.3s ease;pointer-events:none}
+.card:hover .view{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.sold{position:absolute;top:13px;right:13px;background:rgba(255,255,255,.93);padding:7px 9px;font-size:9px;letter-spacing:.12em}
+.info{padding:14px 2px 4px}
+.brand{font-size:10px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.name{font-family:"Playfair Display",Georgia,serif;font-size:21px;line-height:1.12}
+.sub{font-size:11px;color:var(--muted);margin-top:8px}
+.price{font-size:15px;font-weight:500;margin-top:12px}
+.modal{position:fixed;inset:0;background:rgba(12,12,12,.55);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;pointer-events:none;transition:opacity .35s ease;z-index:50}
+.modal.open{opacity:1;pointer-events:auto}
+.modal-box{width:min(930px,100%);background:#f7f5f1;display:grid;grid-template-columns:1.05fr .95fr;transform:translateY(24px) scale(.97);transition:transform .45s cubic-bezier(.2,.8,.2,1);overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.25)}
+.modal.open .modal-box{transform:translateY(0) scale(1)}
+.modal-photo{background:#fff;min-height:540px}
+.modal-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.modal-info{padding:54px 48px;display:flex;flex-direction:column;justify-content:center}
+.modal-brand{font-size:10px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase}
+.modal-name{font-family:"Playfair Display",Georgia,serif;font-size:48px;line-height:1.02;margin:12px 0 16px}
+.modal-meta{font-size:12px;color:var(--muted);margin-bottom:30px}
+.modal-price{font-size:24px;margin-bottom:25px}
+.modal-stock{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#777}
+.close{position:absolute;right:25px;top:20px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.55);background:rgba(0,0,0,.25);color:#fff;font-size:22px;cursor:pointer;z-index:2}
+@media(max-width:1050px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.nav,.controls,.grid{padding-left:20px;padding-right:20px}.search{width:130px}.grid{grid-template-columns:repeat(2,1fr);gap:18px}.modal-box{grid-template-columns:1fr}.modal-photo{min-height:330px;max-height:55vh}.modal-info{padding:28px}.modal-name{font-size:36px}}
+@media(max-width:480px){.wordmark{font-size:15px}.nav .search{display:none}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div></div><input id="search" class="search" placeholder="Search"></div></header>
+
+<section class="controls">
+  <div class="filters">
+    <button class="filter active" data-filter="all">All</button>
+    <button class="filter" data-filter="men">Men</button>
+    <button class="filter" data-filter="women">Women</button>
+    <button class="filter" data-filter="unisex">Unisex</button>
+  </div>
+  <div class="count" id="count">10 fragrances</div>
+</section>
+
+<main class="grid" id="grid">
+    <article class="card" data-category="unisex" data-name="maison francis kurkdjian baccarat rouge 540" data-index="0">
+      <div class="photo">
+        <img src="https://contenthub-delivery.mecca.com/api/public/content/I-030120-I-030120-M1-MaisonFrancisKurkdjian-BaccaratRouge540Extrait-94y1qkJTIKjnExF06ofbg.jpg" alt="Maison Francis Kurkdjian Baccarat Rouge 540" loading="lazy">
+        
+        <div class="hover-shine"></div>
+        <div class="view">VIEW</div>
+      </div>
+      <div class="info">
+        <div class="brand">Maison Francis Kurkdjian</div>
+        <div class="name">Baccarat Rouge 540</div>
+        <div class="sub">70ml · Unisex</div>
+        <div class="price">$249.00</div>
+      </div>
+    </article>
+    
+    <article class="card" data-category="unisex" data-name="louis vuitton imagination" data-index="1">
+      <div class="photo">
+        <img src="https://fr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-parfum-imagination--LP0476_PM2_Front%20view.jpg" alt="Louis Vuitton Imagination" loading="lazy">
+        
+        <div class="hover-shine"></div>
+        <div class="view">VIEW</div>
+      </div>
+      <div class="info">
+        <div class="brand">Louis Vuitton</div>
+        <div class="name">Imagination</div>
+        <div class="sub">100ml · Unisex</div>
+        <div class="price">$449.00</div>
+      </div>
+    </article>
+    
+    <article class="card" data-category="men&#x27;s" data-name="dior sauvage elixir" data-index="2">
+      <div class="photo">
+        <img src="https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw0df82930/Y0996460/Y0996460_C099600755_E01_GHC.jpg?sw=1200" alt="Dior Sauvage Elixir" loading="lazy">
+        
+        <div class="hover-shine"></div>
+        <div class="view">VIEW</div>
+      </div>
+      <div class="info">
+        <div class="brand">Dior</div>
+        <div class="name">Sauvage Elixir</div>
+        <div class="sub">100ml · Men&#x27;s</div>
+        <div class="price">$179.00</div>
+      </div>
+    </article>
+    
+    <article class="card" data-category="unisex" data-name="louis vuitton pacific chill" data-index="3">
+      <div class="photo">
+        <img src="https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-pacific-chill---LP0461_PM2_Front%20view.jpg" alt="Louis Vuitton Pacific Chill" loading="lazy">
+        
+        <div class="hover-shine"></div>
+        <div class="view">VIEW</div>
+      </div>
+      <div class="info">
+        <div class="brand">Louis Vuitton</div>
+        <div class="name">Pacific Chill</div>
+        <div class="sub">100ml · Unisex</div>
+        <div class="price">$449.00</div>
+      </div>
+    </article>
+    
+    <article class="card" data-category="women&#x27;s" data-name="louis vuitton california dream" data-index="4">
+      <div class="photo">
+        <img src="https://fr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-parfum-california-dream--LP0483_PM2_Front%20view.jpg" alt="Louis Vuitton California Dream" loading="lazy">
+        
+        <div class="hover-shine"></div>
+        <div class="view">VIEW</div>
+      </div>
+      <div class="info">
+        <div class="brand">Louis Vuitton</div>
+        <div class="name">California Dream</div>
+        <div class="sub">100ml · Women&#x27;s</div>
+        <div class="price">$449.00</div>
+      </div>
+    </article>
+    
+    <article class="card" data-category="women&#x27;s / unisex" data-name="tom ford lost cherry" data-index="5">
+      <div class="photo">
+        <img src="https://www.tomfordbeauty.com/cdn/shop/files/tf_sku_T6LN01_2000x2000_0.png?v=1790065933&amp;width=2000" alt="Tom Ford Lost Cherry" loading="lazy">
+        
+        <div class="hover-shine"></div>
+        <div class="view">VIEW</div>
+      </div>
+      <div class="info">
+        <div class="brand">Tom Ford</div>
+        <div class="name">Lost Cherry</div>
+        <div class="sub">100ml · Women&#x27;s / Unisex</div>
+        <div class="price">$349.00</div>
+      </div>
+    </article>
+    
+    <article class="card" data-category="men&#x27;s / unisex" data-name="tom ford oud wood" data-index="6">
+      <div class="photo">
+        <img src="https://www.tomfordbeauty.com/cdn/shop/files/tf_sku_T1XF01_2000x2000_0.png?v=1790085430&amp;width=2000" alt="Tom Ford Oud Wood" loading="lazy">
+        
+        <div class="hover-shine"></div>
+        <div class="view">VIEW</div>
+      </div>
+      <div class="info">
+        <div class="brand">Tom Ford</div>
+        <div class="name">Oud Wood</div>
+        <div class="sub">100ml · Men&#x27;s / Unisex</div>
+        <div class="price">$229.00</div>
+      </div>
+    </article>
+    
+    <article class="card" data-category="men&#x27;s / unisex" data-name="louis vuitton ombre nomade" data-index="7">
+      <div class="photo">
+        <img src="https://fr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-parfum-ombre-nomade--LP0529_PM2_Front%20view.jpg" alt="Louis Vuitton Ombre Nomade" loading="lazy">
+        
+        <div class="hover-shine"></div>
+        <div class="view">VIEW</div>
+      </div>
+      <div class="info">
+        <div class="brand">Louis Vuitton</div>
+        <div class="name">Ombre Nomade</div>
+        <div class="sub">100ml · Men&#x27;s / Unisex</div>
+        <div class="price">$299.00</div>
+      </div>
+    </article>
+    
+    <article class="card" data-category="men&#x27;s / unisex" data-name="tom ford tobacco vanille" data-index="8">
+      <div class="photo">
+        <img src="https://www.tomfordbeauty.com/cdn/shop/files/tf_sku_T01K01_2000x2000_0.png?v=1790083541&amp;width=2000" alt="Tom Ford Tobacco Vanille" loading="lazy">
+        
+        <div class="hover-shine"></div>
+        <div class="view">VIEW</div>
+      </div>
+      <div class="info">
+        <div class="brand">Tom Ford</div>
+        <div class="name">Tobacco Vanille</div>
+        <div class="sub">100ml · Men&#x27;s / Unisex</div>
+        <div class="price">$229.00</div>
+      </div>
+    </article>
+    
+    <article class="card" data-category="men&#x27;s / unisex" data-name="creed aventus" data-index="9">
+      <div class="photo">
+        <img src="https://static.thcdn.com/productimg/original/12852836-1365337305025588.jpg" alt="Creed Aventus" loading="lazy">
+        <span class="sold">OUT OF STOCK</span>
+        <div class="hover-shine"></div>
+        <div class="view">VIEW</div>
+      </div>
+      <div class="info">
+        <div class="brand">Creed</div>
+        <div class="name">Aventus</div>
+        <div class="sub">100ml · Men&#x27;s / Unisex</div>
+        <div class="price">$249.00</div>
+      </div>
+    </article>
+    </main>
+
+<div class="modal" id="modal">
+  <button class="close" aria-label="Close">×</button>
+  <div class="modal-box">
+    <div class="modal-photo"><img id="modalImg" alt=""></div>
+    <div class="modal-info">
+      <div class="modal-brand" id="modalBrand"></div>
+      <div class="modal-name" id="modalName"></div>
+      <div class="modal-meta" id="modalMeta"></div>
+      <div class="modal-price" id="modalPrice"></div>
+      <div class="modal-stock" id="modalStock"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const data=[{brand:'Maison Francis Kurkdjian',name:'Baccarat Rouge 540',size:'70ml',category:'Unisex',price:'$249.00',image:'https://contenthub-delivery.mecca.com/api/public/content/I-030120-I-030120-M1-MaisonFrancisKurkdjian-BaccaratRouge540Extrait-94y1qkJTIKjnExF06ofbg.webp',stock:true},{brand:'Louis Vuitton',name:'Imagination',size:'100ml',category:'Unisex',price:'$449.00',image:'https://fr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-parfum-imagination--LP0476_PM2_Front%20view.jpg',stock:true},{brand:'Dior',name:'Sauvage Elixir',size:'100ml',category:"Men's",price:'$179.00',image:'https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw0df82930/Y0996460/Y0996460_C099600755_E01_GHC.jpg?sw=1200',stock:true},{brand:'Louis Vuitton',name:'Pacific Chill',size:'100ml',category:'Unisex',price:'$449.00',image:'https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-pacific-chill---LP0461_PM2_Front%20view.jpg',stock:true},{brand:'Louis Vuitton',name:'California Dream',size:'100ml',category:"Women's",price:'$449.00',image:'https://fr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-parfum-california-dream--LP0483_PM2_Front%20view.jpg',stock:true},{brand:'Tom Ford',name:'Lost Cherry',size:'100ml',category:"Women's / Unisex",price:'$349.00',image:'https://www.tomfordbeauty.com/cdn/shop/files/tf_sku_T6LN01_2000x2000_0.png?v=1790065933&width=2000',stock:true},{brand:'Tom Ford',name:'Oud Wood',size:'100ml',category:"Men's / Unisex",price:'$229.00',image:'https://www.tomfordbeauty.com/cdn/shop/files/tf_sku_T1XF01_2000x2000_0.png?v=1790085430&width=2000',stock:true},{brand:'Louis Vuitton',name:'Ombre Nomade',size:'100ml',category:"Men's / Unisex",price:'$299.00',image:'https://fr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-parfum-ombre-nomade--LP0529_PM2_Front%20view.jpg',stock:true},{brand:'Tom Ford',name:'Tobacco Vanille',size:'100ml',category:"Men's / Unisex",price:'$229.00',image:'https://www.tomfordbeauty.com/cdn/shop/files/tf_sku_T01K01_2000x2000_0.png?v=1790083541&width=2000',stock:true},{brand:'Creed',name:'Aventus',size:'100ml',category:"Men's / Unisex",price:'$249.00',image:'https://static.thcdn.com/productimg/original/12852836-1365337305025588.jpg',stock:false}];
+const cards=[...document.querySelectorAll('.card')];
+const buttons=[...document.querySelectorAll('.filter')];
+const search=document.getElementById('search');
+const count=document.getElementById('count');
+const modal=document.getElementById('modal');
+const close=document.querySelector('.close');
+let active='all';
+
+function update(){
+  const q=search.value.toLowerCase().trim();
+  let visible=0;
+  cards.forEach(card=>{
+    const cat=card.dataset.category;
+    const name=card.dataset.name;
+    const okCat=active==='all'||cat.includes(active);
+    const okSearch=!q||name.includes(q);
+    const show=okCat&&okSearch;
+    card.style.display=show?'':'none';
+    if(show) visible++;
+  });
+  count.textContent=visible+' fragrance'+(visible===1?'':'s');
+}
+buttons.forEach(btn=>btn.addEventListener('click',()=>{
+  buttons.forEach(x=>x.classList.remove('active'));
+  btn.classList.add('active');
+  active=btn.dataset.filter;
+  update();
+}));
+search.addEventListener('input',update);
+
+function openModal(i){
+  const p=data[i];
+  document.getElementById('modalImg').src=p.image;
+  document.getElementById('modalImg').alt=p.brand+' '+p.name;
+  document.getElementById('modalBrand').textContent=p.brand;
+  document.getElementById('modalName').textContent=p.name;
+  document.getElementById('modalMeta').textContent=p.size+' · '+p.category;
+  document.getElementById('modalPrice').textContent=p.price;
+  document.getElementById('modalStock').textContent=p.stock?'Available':'Out of stock';
+  modal.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+cards.forEach(card=>card.addEventListener('click',()=>openModal(Number(card.dataset.index))));
+function closeModal(){modal.classList.remove('open');document.body.style.overflow='';}
+close.addEventListener('click',closeModal);
+modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+</script>
+</body>
+</html>
