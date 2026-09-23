@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Luxury Fragrance & Electronics Showcase</title>
+<title>Campbell & Rylan Showcase</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:wght@400;500&display=swap');
 :root{--bg:#f4f2ee;--paper:#fff;--ink:#111;--muted:#85817a;--line:#ddd9d1}
@@ -62,6 +62,15 @@ header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdro
 @media(max-width:1050px){.grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:760px){.nav,.controls,.grid{padding-left:20px;padding-right:20px}.search{width:130px}.grid{grid-template-columns:repeat(2,1fr);gap:18px}.modal-box{grid-template-columns:1fr}.modal-photo{min-height:330px;max-height:55vh}.modal-info{padding:28px}.modal-name{font-size:36px}}
 @media(max-width:480px){.wordmark{font-size:15px}.nav .search{display:none}.grid{grid-template-columns:1fr}}
+
+.card[data-type="accessories"] .photo img{
+  object-fit:contain;
+  padding:28px;
+  transform:none;
+}
+.card[data-type="accessories"]:hover .photo img{
+  transform:scale(1.02);
+}
 </style>
 </head>
 <body>
@@ -72,11 +81,12 @@ header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdro
     <button class="filter active" data-filter="all">All Products</button>
     <button class="filter" data-filter="fragrances">Fragrances</button>
     <button class="filter" data-filter="electronics">Electronics</button>
+    <button class="filter" data-filter="accessories">Accessories</button>
     <button class="filter" data-filter="men">Men</button>
     <button class="filter" data-filter="women">Women</button>
     <button class="filter" data-filter="unisex">Unisex</button>
   </div>
-  <div class="count" id="count">14 products</div>
+  <div class="count" id="count">15 products</div>
 </section>
 
 <section class="section" data-section="fragrances">
@@ -252,6 +262,26 @@ header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdro
     <article class="card" data-type="electronics" data-category="electronics" data-name="airpods pro 2" data-index="13">
       <div class="photo"><img src="https://www.apple.com/newsroom/images/product/airpods/standard/Apple-AirPods-Pro-2nd-gen-hero-220907_big.jpg.large.jpg" alt="Apple AirPods Pro 2" loading="lazy"><div class="hover-shine"></div><div class="view">VIEW</div></div>
       <div class="info"><div class="brand">Apple</div><div class="name">AirPods Pro 2</div><div class="sub">2nd generation · Electronics</div><div class="price">$199.00</div></div>
+    </article>
+  </div>
+</section>
+
+
+<section class="section" data-section="accessories">
+  <div class="section-head"><div class="section-title">Accessories</div><div class="section-kicker">Designer accessories</div></div>
+  <div class="grid" id="accessoriesGrid">
+    <article class="card" data-type="accessories" data-category="accessories" data-name="prada sunglasses" data-index="14">
+      <div class="photo">
+        <img src="https://assets2.sunglasshut.com/prod-onecp-record-files/pieyewear/5ede3782-0e07-4654-bf3a-b36200e8e0b2/0PR_17WS__11N09T__P21__shad__qt.png?impolicy=SGH_bgtransparent&width=1024" alt="Prada Sunglasses" loading="lazy">
+        <div class="hover-shine"></div>
+        <div class="view">VIEW</div>
+      </div>
+      <div class="info">
+        <div class="brand">Prada</div>
+        <div class="name">Prada Sunglasses</div>
+        <div class="sub">Designer sunglasses · Accessories</div>
+        <div class="price">$199.00</div>
+      </div>
     </article>
   </div>
 </section>
