@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Campbell & Rylan Showcase</title>
+<title>Luxe Supply</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:wght@400;500&display=swap');
 :root{--bg:#f4f2ee;--paper:#fff;--ink:#111;--muted:#85817a;--line:#ddd9d1}
@@ -71,10 +71,29 @@ header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdro
 .card[data-type="accessories"]:hover .photo img{
   transform:scale(1.02);
 }
+
+.purchase-cta{max-width:1500px;margin:0 auto;padding:20px 42px 90px}
+.purchase-inner{background:#111;color:#fff;text-align:center;padding:65px 25px;border-radius:14px}
+.purchase-kicker{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#aaa;margin-bottom:12px}
+.purchase-inner h2{font-family:"Playfair Display",Georgia,serif;font-size:42px;font-weight:500;margin:0 0 12px}
+.purchase-inner p{font-size:13px;color:#bdbdbd;margin:0 auto 25px;line-height:1.6}
+.instagram-btn{display:inline-flex;align-items:center;gap:12px;background:#fff;color:#111;padding:13px 20px;border-radius:999px;font-size:11px;font-weight:500;letter-spacing:.05em;text-decoration:none;transition:.25s ease}
+.instagram-btn:hover{transform:translateY(-2px);background:#f1f1f1}
+@media(max-width:760px){.purchase-cta{padding:10px 20px 60px}.purchase-inner{padding:50px 20px}.purchase-inner h2{font-size:34px}}
+.instagram-top-link{color:#111;text-decoration:none;font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-left:18px;white-space:nowrap}.instagram-top-link:hover{opacity:.6}
 </style>
 </head>
 <body>
-<header><div class="nav"><div></div><input id="search" class="search" placeholder="Search"></div></header>
+<header><div class="nav"><div></div><input id="search" class="search" placeholder="Search"></div>
+<a class="instagram-top-link" href="https://www.instagram.com/supply.luxe/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></header>
+<section class="purchase-cta">
+  <div class="purchase-inner">
+    <h2>Ready to order?</h2>
+    <a class="instagram-btn" href="https://www.instagram.com/supply.luxe/" target="_blank" rel="noopener noreferrer">
+      DM us on Instagram to order <span>↗</span>
+    </a>
+  </div>
+</section>
 
 <section class="controls">
   <div class="filters">
@@ -285,6 +304,9 @@ header{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.78);backdro
     </article>
   </div>
 </section>
+
+
+
 
 <div class="modal" id="modal">
   <button class="close" aria-label="Close">×</button>
